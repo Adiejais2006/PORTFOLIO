@@ -1,5 +1,6 @@
 'use client';
 import { useState, useEffect, useRef } from 'react';
+import LeetCodeWidget from './LeetCodeWidget';
 
 /* ── Scroll-triggered reveal hook ── */
 function useInView(threshold = 0.15) {
@@ -46,7 +47,7 @@ const hackathonContent = (
 
 const codingContent = (
   <div className="p-5 bg-white">
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-5">
       {[
         { platform: 'Codeforces', rating: '1323', rank: 'Pupil',           color: '#60a5fa', icon: '⚡' },
         { platform: 'CodeChef',   rating: '3★',   rank: '3-Star',          color: '#f87171', icon: '🍴' },
@@ -60,6 +61,8 @@ const codingContent = (
         </div>
       ))}
     </div>
+    {/* Live LeetCode Stats */}
+    <LeetCodeWidget />
   </div>
 );
 
