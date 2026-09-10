@@ -1,65 +1,73 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 export default function CustomCursor() {
-  const [pos, setPos] = useState({ x: -200, y: -200 });
+  const dotRef  = useRef(null);
+  const ringRef = useRef(null);
+  const [clicked, setClicked]   = useState(false);
+  const [hovering, setHovering] = useState(false);
 
   useEffect(() => {
-    const move = (e) => setPos({ x: e.clientX, y: e.clientY });
-    window.addEventListener('mousemove', move);
-    return () => window.removeEventListener('mousemove', move);
+    const dot  = dotRef.current;
+    const ring = ringRef.current;
+    if (!dot || !ring) return;
+
+    let mx = 0, my = 0;
+    let rx = 0, ry = 0;
+    let raf;
+
+    const onMove = (e) => { mx = e.clientX; my = e.clientY; };
+    const onDown  = () => setClicked(true);
+    const onUp    = () => setClicked(false);
+
+    const onEnter = (e) => {
+      const tag = e.target.tagName.toLowerCase();
+      const role = e.target.getAttribute('role');
+      if (['a', 'button', 'input', 'textarea'].includes(tag) || role === 'button') {
+        setHovering(true);
+      }
+    };
+    const onLeave = () => setHovering(false);
+
+    const loop = () => {
+      dot.style.transform  = `translate(${mx - 5}px, ${my - 5}px)`;
+      rx += (mx - rx) * 0.15;
+      ry += (my - ry) * 0.15;
+      ring.style.transform = `translate(${rx - 18}px, ${ry - 18}px)`;
+      raf = requestAnimationFrame(loop);
+    };
+
+    window.addEventListener('mousemove', onMove);
+    window.addEventListener('mousedown', onDown);
+    window.addEventListener('mouseup',   onUp);
+    document.addEventListener('mouseover',  onEnter);
+    document.addEventListener('mouseout',   onLeave);
+    raf = requestAnimationFrame(loop);
+    document.body.style.cursor = 'none';
+
+    return () => {
+      window.removeEventListener('mousemove', onMove);
+      window.removeEventListener('mousedown', onDown);
+      window.removeEventListener('mouseup',   onUp);
+      document.removeEventListener('mouseover',  onEnter);
+      document.removeEventListener('mouseout',   onLeave);
+      cancelAnimationFrame(raf);
+      document.body.style.cursor = '';
+    };
   }, []);
 
   return (
-    <svg
-      className="zoro-cursor"
-      style={{ left: pos.x, top: pos.y }}
-      viewBox="0 0 32 32"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true"
-    >
-      {/* ── Blade (dark green, long diagonal) ── */}
-      <rect
-        x="3" y="1"
-        width="5" height="22"
-        rx="1"
-        fill="#1b5e20"
-        stroke="#000"
-        strokeWidth="1.2"
-        transform="rotate(0 5.5 12)"
-      />
-      {/* Blade edge highlight */}
-      <rect x="4" y="1" width="1.5" height="20" rx="0.5" fill="#388e3c" />
-
-      {/* ── Tsuba / Guard (black square) ── */}
-      <rect
-        x="1" y="21"
-        width="9" height="3"
-        rx="1"
-        fill="#111"
-        stroke="#000"
-        strokeWidth="1"
-      />
-
-      {/* ── Hilt / Handle (wrapped grip) ── */}
-      <rect
-        x="3" y="24"
-        width="5" height="7"
-        rx="1"
-        fill="#3e2723"
-        stroke="#000"
-        strokeWidth="1"
-      />
-      {/* Grip wrapping lines */}
-      <line x1="3" y1="26" x2="8" y2="26" stroke="#5d4037" strokeWidth="1" />
-      <line x1="3" y1="28" x2="8" y2="28" stroke="#5d4037" strokeWidth="1" />
-      <line x1="3" y1="30" x2="8" y2="30" stroke="#5d4037" strokeWidth="1" />
-
-      {/* ── Pommel ── */}
-      <ellipse cx="5.5" cy="31" rx="3" ry="1.5" fill="#1a1a1a" stroke="#000" strokeWidth="0.8" />
-
-      {/* ── Blade tip (sharp point at top) ── */}
-      <polygon points="5.5,0 3,3 8,3" fill="#2e7d32" stroke="#000" strokeWidth="0.8" />
-    </svg>
+    <>
+      <div ref={dotRef} className="fixed top-0 left-0 pointer-events-none z-[9999]"
+        style={{ width: 10, height: 10, borderRadius: '50%',
+          background: clicked ? '#f87171' : hovering ? '#a78bfa' : '#000',
+          transition: 'background 0.15s ease' }} />
+      <div ref={ringRef} className="fixed top-0 left-0 pointer-events-none z-[9998]"
+        style={{ width: 36, height: 36, borderRadius: '50%',
+          border: `3px solid ${hovering ? '#a78bfa' : '#000'}`,
+          background: hovering ? '#a78bfa22' : 'transparent',
+          transform: clicked ? 'scale(0.85)' : hovering ? 'scale(1.4)' : 'scale(1)',
+          transition: 'border-color 0.2s ease, background 0.2s ease, transform 0.15s ease' }} />
+    </>
   );
 }

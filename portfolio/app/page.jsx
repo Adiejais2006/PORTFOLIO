@@ -12,6 +12,7 @@ import ActivityStrips from './components/ActivityStrips';
 import Footer from './components/Footer';
 import ContactModal from './components/ContactModal';
 import ResumeModal from './components/ResumeModal';
+import StatsStrip from './components/StatsStrip';
 
 export default function Home() {
   const [loaded, setLoaded] = useState(false);
@@ -32,6 +33,7 @@ export default function Home() {
 
         <main>
           <Hero onContactClick={() => setIsModalOpen(true)} onResumeClick={() => setIsResumeOpen(true)} />
+          <StatsStrip />
           <Experience />
           <Projects />
           <Skills />

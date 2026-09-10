@@ -1,4 +1,41 @@
 'use client';
+import { useState, useEffect } from 'react';
+
+const TITLES = [
+  'FULL_STACK_DEVELOPER()',
+  'COMPETITIVE_PROGRAMMER()',
+  'IOT_ENGINEER()',
+  'AI_ENTHUSIAST()',
+];
+
+function useTypewriter(words, typingSpeed = 80, deletingSpeed = 40, pauseMs = 1800) {
+  const [display, setDisplay] = useState('');
+  const [wordIdx, setWordIdx] = useState(0);
+  const [phase, setPhase]     = useState('typing');
+
+  useEffect(() => {
+    const word = words[wordIdx];
+    if (phase === 'typing') {
+      if (display.length < word.length) {
+        const t = setTimeout(() => setDisplay(word.slice(0, display.length + 1)), typingSpeed);
+        return () => clearTimeout(t);
+      } else {
+        const t = setTimeout(() => setPhase('deleting'), pauseMs);
+        return () => clearTimeout(t);
+      }
+    } else {
+      if (display.length > 0) {
+        const t = setTimeout(() => setDisplay(display.slice(0, -1)), deletingSpeed);
+        return () => clearTimeout(t);
+      } else {
+        setWordIdx((i) => (i + 1) % words.length);
+        setPhase('typing');
+      }
+    }
+  }, [display, phase, wordIdx, words, typingSpeed, deletingSpeed, pauseMs]);
+
+  return display;
+}
 
 /* ── Social icon SVGs ── */
 const GithubIcon = () => (
@@ -26,6 +63,15 @@ const EmailIcon = () => (
     <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.908 1.528-1.147C21.69 2.28 24 3.434 24 5.457z"/>
   </svg>
 );
+
+function TypewriterBadge() {
+  const text = useTypewriter(TITLES);
+  return (
+    <div className="mt-2 bg-black text-white font-mono text-xs px-4 py-1.5 rounded border-2 border-black font-bold tracking-wide min-w-[200px] text-center">
+      {text}<span className="animate-pulse">▌</span>
+    </div>
+  );
+}
 
 const TerminalBox = () => (
   <div className="neo-card bg-[#1a1a1a] rounded-xl overflow-hidden">
@@ -93,9 +139,7 @@ export default function Hero({ onContactClick, onResumeClick }) {
             >
               ADITYA JAISWAL
             </h1>
-            <div className="mt-2 bg-black text-white font-mono text-xs px-4 py-1.5 rounded border-2 border-black font-bold tracking-wide">
-              FULL_STACK_DEVELOPER()
-            </div>
+            <TypewriterBadge />
           </div>
 
           {/* Info rows */}
