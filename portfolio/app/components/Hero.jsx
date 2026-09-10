@@ -81,9 +81,11 @@ export default function Hero({ onContactClick, onResumeClick }) {
               className="relative rounded-full border-4 border-black overflow-hidden"
               style={{ width: 130, height: 130, boxShadow: '4px 4px 0px #000' }}
             >
-              <div className="w-full h-full bg-gradient-to-br from-[#a78bfa] to-[#60a5fa] flex items-center justify-center text-6xl select-none">
-                🧑‍💻
-              </div>
+              <img
+                src="/profile.jpg"
+                alt="Aditya Jaiswal"
+                className="w-full h-full object-cover object-top"
+              />
             </div>
             <h1
               className="mt-4 text-3xl font-black italic text-center leading-tight"
