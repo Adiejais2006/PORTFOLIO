@@ -1,0 +1,237 @@
+@import "tailwindcss";
+
+@theme {
+  /* ── Aditi's exact colour palette ── */
+  --color-custom-pink: #ff9fac;
+  --color-custom-purple: #a78bfa;
+  --color-custom-blue: #60a5fa;
+  --color-custom-red: #f87171;
+  --color-custom-yellow: #fcd34d;
+  --color-custom-green: #4ade80;
+
+  /* keep legacy names mapped to new values */
+  --color-sky-custom: #60a5fa;
+  --color-yellow-custom: #fcd34d;
+  --color-pink-custom: #ff9fac;
+  --color-green-custom: #4ade80;
+  --color-purple-custom: #a78bfa;
+  --color-salmon: #f87171;
+
+  /* Fonts */
+  --font-shrikhand: 'Shrikhand', cursive;
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-mono: 'Space Mono', ui-monospace, monospace;
+  --font-sans: 'Inter', 'DM Sans', ui-sans-serif, system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  cursor: none;
+  /* Aditi's purple background + chalk texture overlay */
+  background-color: #a78bfa;
+  background-image: url('https://www.transparenttextures.com/patterns/black-chalk.png');
+  font-family: 'Inter', 'DM Sans', sans-serif;
+  font-size: 1rem;
+  overflow-x: hidden;
+  color: #000;
+  min-height: 100vh;
+}
+
+/* ===== TEXT SELECTION (Aditi's yellow highlight) ===== */
+::selection {
+  background-color: #fcd34d;
+  color: #000;
+}
+
+/* ===== CUSTOM SCROLLBAR (Aditi's style) ===== */
+::-webkit-scrollbar { width: 12px; }
+::-webkit-scrollbar-track {
+  background: #fff;
+  border-left: 2px solid #000;
+}
+::-webkit-scrollbar-thumb {
+  background: #000;
+  border: 2px solid #fff;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover { background: #ff9fac; }
+
+/* ===== TYPING ANIMATION ===== */
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+.typing-effect {
+  overflow: hidden;
+  white-space: nowrap;
+  animation: typing 3s steps(30, end) forwards;
+}
+.cursor-blink {
+  display: inline-block;
+  width: 10px;
+  height: 1.1em;
+  background: #4ade80;
+  animation: blink 1s step-end infinite;
+  vertical-align: text-bottom;
+  margin-left: 2px;
+}
+
+/* ===== MARQUEE (Aditi uses 80s speed) ===== */
+@keyframes marquee {
+  0%   { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+.marquee-inner {
+  display: flex;
+  white-space: nowrap;
+  animation: marquee 80s linear infinite;
+}
+
+/* ===== TAPE ELEMENT ===== */
+.tape {
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-3deg);
+  width: 80px;
+  height: 24px;
+  background: rgba(252, 211, 77, 0.75);
+  border: 1px solid rgba(0,0,0,0.3);
+  z-index: 10;
+}
+
+/* ===== ACCORDION ===== */
+.accordion-panel {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.accordion-panel.open { max-height: 800px; }
+
+/* ===== SKILL PILL ===== */
+.skill-pill {
+  display: inline-block;
+  background: #000;
+  color: #fff;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.8rem;
+  padding: 5px 14px;
+  border: 2px solid #000;
+  border-radius: 9999px;
+  margin: 3px;
+  font-weight: 700;
+  white-space: nowrap;
+  transition: background 0.15s ease, color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+  cursor: none;
+}
+.skill-pill:hover {
+  background: #fcd34d;
+  color: #000;
+  border-color: #000;
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0 #000;
+}
+
+/* ===== NEO-BRUTALIST BASE ===== */
+.neo-btn {
+  border: 4px solid #000;
+  box-shadow: 6px 6px 0px #000;
+  transition: all 0.15s ease-in-out;
+  cursor: none;
+  display: inline-block;
+}
+.neo-btn:hover  { transform: translate(-4px, -4px); box-shadow: 10px 10px 0px #000; }
+.neo-btn:active { transform: translate(0px, 0px);   box-shadow: none; }
+
+.neo-card {
+  border: 4px solid #000;
+  box-shadow: 6px 6px 0px #000;
+  transition: all 0.15s ease-in-out;
+}
+.neo-card:hover { transform: translate(-4px, -4px); box-shadow: 10px 10px 0px #000; }
+
+/* ===== ZORO CURSOR ===== */
+.zoro-cursor {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  filter: drop-shadow(3px 3px 0px black);
+  transform: translate(-4px, -4px) rotate(-45deg);
+  width: 32px;
+  height: 32px;
+  max-width: 32px;
+}
+
+/* ===== WINDOW DOTS ===== */
+.win-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid rgba(0,0,0,0.3);
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+/* ===== SOCIAL ICON BTN ===== */
+.social-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 2px solid #000;
+  box-shadow: 3px 3px 0 #000;
+  transition: all 0.15s ease;
+  cursor: none;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+.social-icon-btn:hover  { transform: translate(-2px, -2px); box-shadow: 5px 5px 0 #000; }
+.social-icon-btn:active { transform: translate(0,0);        box-shadow: none; }
+
+/* ===== CANVAS ===== */
+#drawing-canvas { touch-action: none; }
+
+/* ===== TECH SCROLL ===== */
+.tech-scroll {
+  display: flex;
+  overflow-x: auto;
+  gap: 6px;
+  padding-bottom: 4px;
+  scrollbar-width: thin;
+  scrollbar-color: #000 transparent;
+}
+
+/* ===== FADE OUT ===== */
+@keyframes fadeOut {
+  0%   { opacity: 1; }
+  100% { opacity: 0; }
+}
+.fade-out { animation: fadeOut 0.6s ease forwards; pointer-events: none; }
+
+/* ===== LOADING SHIMMER ===== */
+@keyframes loadingShimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+.progress-shimmer {
+  background: linear-gradient(90deg, #fcd34d 0%, #fef08a 50%, #fcd34d 100%);
+  background-size: 200% auto;
+  animation: loadingShimmer 1.5s linear infinite;
+}
+
+/* ===== STAGGERED ACCORDION STRIP TEXT ===== */
+.strip-label {
+  font-family: 'Shrikhand', cursive;
+  font-weight: 900;
+  font-style: italic;
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
