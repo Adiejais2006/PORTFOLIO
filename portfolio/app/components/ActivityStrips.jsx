@@ -1,6 +1,9 @@
 'use client';
 import { useState, useEffect, useRef } from 'react';
 import LeetCodeWidget from './LeetCodeWidget';
+import GitHubWidget from './GitHubWidget';
+import CodeforcesWidget from './CodeforcesWidget';
+import CodeChefWidget from './CodeChefWidget';
 
 /* ── Scroll-triggered reveal hook ── */
 function useInView(threshold = 0.15) {
@@ -47,22 +50,13 @@ const hackathonContent = (
 
 const codingContent = (
   <div className="p-5 bg-white">
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-5">
-      {[
-        { platform: 'Codeforces', rating: '1323', rank: 'Pupil',           color: '#60a5fa', icon: '⚡' },
-        { platform: 'CodeChef',   rating: '3★',   rank: '3-Star',          color: '#f87171', icon: '🍴' },
-        { platform: 'LeetCode',   rating: '600+',  rank: 'Problems Solved', color: '#4ade80', icon: '🧩' },
-      ].map((item) => (
-        <div key={item.platform} className="neo-card bg-white rounded-xl p-4 text-center">
-          <div className="text-3xl mb-1">{item.icon}</div>
-          <div className="font-black text-base" style={{ fontFamily: "'Shrikhand', cursive" }}>{item.platform}</div>
-          <div className="text-3xl font-black my-1.5" style={{ color: item.color, fontFamily: "'Shrikhand', cursive" }}>{item.rating}</div>
-          <div className="font-mono text-xs bg-black text-white px-2 py-0.5 inline-block">{item.rank}</div>
-        </div>
-      ))}
+    {/* Live widgets grid */}
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+      <LeetCodeWidget />
+      <CodeforcesWidget />
+      <CodeChefWidget />
     </div>
-    {/* Live LeetCode Stats */}
-    <LeetCodeWidget />
+    <GitHubWidget />
   </div>
 );
 
@@ -137,15 +131,15 @@ function Strip({ strip, openSection, setOpenSection, index }) {
         </button>
       </div>
 
-      {/* Accordion panel — smooth cubic-bezier easing */}
+      {/* Accordion panel */}
       <div
-        className="overflow-hidden border-x-4 border-black transition-all duration-500 ease-in-out"
+        className="overflow-hidden border-x-4 border-black"
         style={{
-          maxHeight: isOpen ? '600px' : '0px',
+          maxHeight: isOpen ? (strip.id === 'coding' ? '2000px' : '600px') : '0px',
           borderBottom: isOpen ? '4px solid #000' : '0px solid #000',
           boxShadow: isOpen ? '10px 10px 0 #000' : 'none',
           opacity: isOpen ? 1 : 0,
-          transition: 'max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease, box-shadow 0.3s ease, border-bottom 0.1s ease',
+          transition: 'max-height 0.7s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease, box-shadow 0.3s ease, border-bottom 0.1s ease',
         }}
       >
         {strip.content}

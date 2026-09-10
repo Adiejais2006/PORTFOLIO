@@ -166,12 +166,19 @@ export default function Hero({ onContactClick, onResumeClick }) {
             </p>
 
             {/* ── Open to opportunities badge ── */}
-            <div className="mt-4">
+            <div className="mt-4 flex flex-wrap gap-3">
               <span
                 className="inline-flex items-center gap-2 bg-white border-2 border-black font-black text-black text-sm px-5 py-2.5 rounded-full shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
                 style={{ fontFamily: "'Inter', sans-serif" }}
               >
                 🚀 <span>Open to Software Engineering and Research opportunities</span>
+              </span>
+              <span
+                className="inline-flex items-center gap-2 bg-black text-white border-2 border-black font-black text-sm px-5 py-2.5 rounded-full shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
+                style={{ fontFamily: "'Inter', sans-serif" }}
+              >
+                <span className="w-2 h-2 rounded-full bg-[#4ade80] animate-pulse inline-block" />
+                <span>Currently Building: TrippoAI</span>
               </span>
             </div>
           </div>
