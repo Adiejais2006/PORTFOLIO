@@ -1,4 +1,5 @@
 'use client';
+import { useState, useEffect, useRef, useCallback } from 'react';
 
 const projects = [
   {
@@ -64,18 +65,145 @@ const projects = [
   },
 ];
 
+/* ── 3D Tilt Card ── */
+function ProjectCard({ p, index }) {
+  const cardRef = useRef(null);
+  const [tilt, setTilt] = useState({ x: 0, y: 0 });
+  const [hovered, setHovered] = useState(false);
+  const [inView, setInView] = useState(false);
+
+  /* Scroll-triggered entrance */
+  useEffect(() => {
+    const el = cardRef.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setInView(true); obs.disconnect(); } },
+      { threshold: 0.12 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
+  /* 3D tilt */
+  const handleMouseMove = useCallback((e) => {
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = ((e.clientY - rect.top)  / rect.height - 0.5) * 14;
+    const y = ((e.clientX - rect.left) / rect.width  - 0.5) * -14;
+    setTilt({ x, y });
+  }, []);
+
+  const handleMouseLeave = () => { setTilt({ x: 0, y: 0 }); setHovered(false); };
+
+  return (
+    <div
+      ref={cardRef}
+      onMouseMove={handleMouseMove}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={handleMouseLeave}
+      style={{
+        opacity:   inView ? 1 : 0,
+        transform: inView
+          ? `perspective(900px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg) translateY(0px)`
+          : 'perspective(900px) translateY(40px)',
+        transition: inView
+          ? `opacity 0.55s ease ${index * 80}ms, transform 0.55s ease ${index * 80}ms`
+          : 'none',
+        transformStyle: 'preserve-3d',
+        willChange: 'transform',
+      }}
+      className="neo-card bg-white rounded-xl flex flex-col overflow-hidden cursor-default"
+    >
+      {/* Colored top strip */}
+      <div className="h-3 w-full border-b-4 border-black" style={{ background: p.color }} />
+
+      <div className="p-5 flex flex-col flex-1 gap-3 relative">
+        {/* Title + links */}
+        <div className="flex items-start justify-between">
+          <div className="flex-1 min-w-0">
+            <h3 className="text-xl font-black leading-tight" style={{ fontFamily: "'Shrikhand', cursive" }}>
+              {p.title}
+            </h3>
+            {p.subtitle && (
+              <p className="text-xs font-mono text-gray-500 font-bold mt-0.5">{p.subtitle}</p>
+            )}
+          </div>
+          <div className="flex gap-1.5 ml-2 shrink-0">
+            {p.demo && (
+              <a href={p.demo} target="_blank" rel="noopener noreferrer"
+                className="neo-btn bg-[#4ade80] text-black w-8 h-8 flex items-center justify-center text-sm rounded"
+                title="Live Demo">▶</a>
+            )}
+            <a href={p.link} target="_blank" rel="noopener noreferrer"
+              className="neo-btn bg-black text-white w-8 h-8 flex items-center justify-center text-sm rounded"
+              title="View on GitHub">↗</a>
+          </div>
+        </div>
+
+        {/* Period badge */}
+        {p.period && (
+          <div className="inline-flex">
+            <span className="bg-black text-white font-mono font-bold text-xs px-3 py-0.5 rounded-full border-2 border-black">
+              📅 {p.period}
+            </span>
+          </div>
+        )}
+
+        {/* Description */}
+        <p className="text-sm text-gray-700 font-semibold leading-relaxed flex-1">{p.description}</p>
+
+        {/* Tech stack */}
+        <div className="tech-scroll pb-1">
+          {p.tech.map((t) => (
+            <span key={t} className="skill-pill flex-shrink-0">{t}</span>
+          ))}
+        </div>
+
+        {/* ── Hover reveal overlay ── */}
+        <div
+          className="absolute inset-0 flex flex-col items-center justify-center gap-4 px-6"
+          style={{
+            background: p.color + 'f0',
+            opacity: hovered ? 1 : 0,
+            transform: hovered ? 'translateY(0%)' : 'translateY(100%)',
+            transition: 'opacity 0.3s ease, transform 0.3s cubic-bezier(0.4,0,0.2,1)',
+            borderTop: '4px solid #000',
+          }}
+        >
+          <div className="font-black text-2xl text-black text-center" style={{ fontFamily: "'Shrikhand', cursive" }}>
+            {p.title}
+          </div>
+          <div className="flex flex-wrap gap-2 justify-center">
+            {p.tech.map(t => (
+              <span key={t} className="bg-black text-white font-mono text-xs px-2 py-1 rounded border-2 border-black font-bold">
+                {t}
+              </span>
+            ))}
+          </div>
+          <div className="flex gap-3 mt-2">
+            {p.demo && (
+              <a href={p.demo} target="_blank" rel="noopener noreferrer"
+                className="neo-btn bg-white text-black font-black text-sm px-5 py-2 rounded flex items-center gap-2">
+                ▶ Live Demo
+              </a>
+            )}
+            <a href={p.link} target="_blank" rel="noopener noreferrer"
+              className="neo-btn bg-black text-white font-black text-sm px-5 py-2 rounded flex items-center gap-2">
+              ↗ GitHub
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function Projects() {
   return (
     <section id="projects" className="py-6 px-4">
-      <div
-        className="neo-card bg-[#fcd34d] rounded-2xl p-8 max-w-6xl mx-auto"
-      >
+      <div className="neo-card bg-[#fcd34d] rounded-2xl p-8 max-w-6xl mx-auto">
         {/* Heading */}
         <div className="flex items-center gap-4 mb-10">
-          <h2
-            className="text-4xl font-black italic"
-            style={{ fontFamily: "'Shrikhand', cursive" }}
-          >
+          <h2 className="text-4xl font-black italic" style={{ fontFamily: "'Shrikhand', cursive" }}>
             PROJECTS
           </h2>
           <div className="flex-1 h-1 bg-black" />
@@ -85,75 +213,7 @@ export default function Projects() {
         {/* Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {projects.map((p, i) => (
-            <div
-              key={i}
-              className="neo-card bg-white rounded-xl flex flex-col overflow-hidden"
-            >
-              {/* Colored top strip */}
-              <div className="h-3 w-full border-b-4 border-black" style={{ background: p.color }} />
-
-              <div className="p-5 flex flex-col flex-1 gap-3">
-                {/* Title + link */}
-                <div className="flex items-start justify-between">
-                  <div className="flex-1 min-w-0">
-                    <h3
-                      className="text-xl font-black leading-tight"
-                      style={{ fontFamily: "'Shrikhand', cursive" }}
-                    >
-                      {p.title}
-                    </h3>
-                    {p.subtitle && (
-                      <p className="text-xs font-mono text-gray-500 font-bold mt-0.5">{p.subtitle}</p>
-                    )}
-                  </div>
-                  <div className="flex gap-1.5 ml-2 shrink-0">
-                    {p.demo && (
-                      <a
-                        href={p.demo}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="neo-btn bg-[#4ade80] text-black w-8 h-8 flex items-center justify-center text-sm rounded"
-                        title="Live Demo"
-                      >
-                        ▶
-                      </a>
-                    )}
-                    <a
-                      href={p.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="neo-btn bg-black text-white w-8 h-8 flex items-center justify-center text-sm rounded"
-                      title="View on GitHub"
-                    >
-                      ↗
-                    </a>
-                  </div>
-                </div>
-
-                {/* Period badge */}
-                {p.period && (
-                  <div className="inline-flex">
-                    <span className="bg-black text-white font-mono font-bold text-xs px-3 py-0.5 rounded-full border-2 border-black">
-                      📅 {p.period}
-                    </span>
-                  </div>
-                )}
-
-                {/* Description */}
-                <p className="text-sm text-gray-700 font-semibold leading-relaxed flex-1">
-                  {p.description}
-                </p>
-
-                {/* Tech stack */}
-                <div className="tech-scroll pb-1">
-                  {p.tech.map((t) => (
-                    <span key={t} className="skill-pill flex-shrink-0">
-                      {t}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
+            <ProjectCard key={i} p={p} index={i} />
           ))}
         </div>
       </div>
