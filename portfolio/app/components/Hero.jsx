@@ -178,23 +178,8 @@ export default function Hero({ onContactClick }) {
           {/* Terminal */}
           <TerminalBox />
 
-          {/* ── Stats Banner: rounded pill, 4-column, white numbers / black labels ── */}
-          <div
-            className="neo-card bg-[#a78bfa] rounded-full border-4 border-black px-6 py-4 flex justify-around items-center text-center"
-            style={{ boxShadow: '6px 6px 0 #000' }}
-          >
-            {stats.map((s) => (
-              <div key={s.label} className="flex flex-col items-center">
-                <span
-                  className="text-3xl font-black text-white leading-none"
-                  style={{ fontFamily: "'Shrikhand', cursive" }}
-                >
-                  {s.val}
-                </span>
-                <span className="text-xs font-mono text-black font-bold mt-1">{s.label}</span>
-              </div>
-            ))}
-          </div>
+
+
         </div>
       </div>
     </section>
