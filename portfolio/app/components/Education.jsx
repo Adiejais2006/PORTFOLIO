@@ -205,21 +205,8 @@ export default function Education() {
               coursework={null}
             />
 
-            {/* Achievements terminal */}
-            <div className="neo-card bg-black text-white rounded-xl p-5 font-mono">
-              <div className="text-[#fcd34d] font-bold text-sm mb-3">$ cat achievements.txt</div>
-              <ul className="space-y-2 text-xs">
-                {[
-                  'Inter-IIIT Hackathon — 5th Rank All India',
-                  'Smart India Hackathon 2025 — Institute Winner',
-                  'Codeforces Pupil (Rating: 1323)',
-                  'CodeChef 3-Star rated',
-                  '600+ DSA problems solved',
-                ].map((item) => (
-                  <li key={item} className="flex gap-2"><span className="text-green-400 shrink-0">▶</span>{item}</li>
-                ))}
-              </ul>
-            </div>
+
+
           </div>
 
           {/* RIGHT: Drawing Board window */}
