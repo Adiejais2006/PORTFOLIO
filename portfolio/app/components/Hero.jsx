@@ -66,7 +66,7 @@ const stats = [
   { label: 'CGPA',       val: '8.74' },
 ];
 
-export default function Hero({ onContactClick }) {
+export default function Hero({ onContactClick, onResumeClick }) {
   return (
     <section id="hero" className="min-h-screen pt-28 pb-16 px-4 flex items-center justify-center">
       <div className="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-[380px_1fr] gap-8">
@@ -112,14 +112,13 @@ export default function Hero({ onContactClick }) {
 
           {/* Action buttons */}
           <div className="flex gap-3 mt-1">
-            <a
-              href="/resume.pdf"
-              download
+            <button
+              onClick={onResumeClick}
               className="neo-btn flex-1 bg-[#4ade80] text-black font-black text-xs text-center py-2.5 px-2 rounded"
               style={{ fontFamily: "'Space Mono', monospace" }}
             >
               ⬇ DOWNLOAD_RESUME
-            </a>
+            </button>
             <button
               onClick={onContactClick}
               className="neo-btn flex-1 bg-[#f87171] text-white font-black text-xs py-2.5 px-2 rounded"

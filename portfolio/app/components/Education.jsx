@@ -188,7 +188,7 @@ export default function Education() {
             />
             <EduCard
               windowTitle="CLASS_XII.EXE"
-              institute="Kendriya Vidyalaya No.2 AFS Jodhpur"
+              institute="Arvind Academy"
               degree="Class XII — Senior Secondary (PCM) · CBSE"
               period="Completed 2024"
               scoreLabel="Percentage"
@@ -197,7 +197,7 @@ export default function Education() {
             />
             <EduCard
               windowTitle="CLASS_X.EXE"
-              institute="Kendriya Vidyalaya No.2 AFS Jodhpur"
+              institute="Arvind Academy"
               degree="Class X — Secondary Education · CBSE"
               period="Completed 2022"
               scoreLabel="Percentage"
