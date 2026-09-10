@@ -52,11 +52,11 @@ const TerminalBox = () => (
 );
 
 const socialLinks = [
-  { icon: <GithubIcon />, href: 'https://github.com/Adiejais2006', label: 'GitHub',    bg: '#f3f4f6',  color: '#000' },
-  { icon: <LinkedInIcon />, href: 'https://linkedin.com',           label: 'LinkedIn', bg: '#bfdbfe',  color: '#000' },
-  { icon: <XIcon />,        href: 'https://x.com',                  label: 'X',        bg: '#111',     color: '#fff' },
-  { icon: <LeetCodeIcon />, href: 'https://leetcode.com',           label: 'LeetCode', bg: '#fef3c7',  color: '#000' },
-  { icon: <EmailIcon />,    href: 'mailto:adityajaisnta@gmail.com', label: 'Email',    bg: '#fcd34d',  color: '#000' },
+  { icon: <GithubIcon />, href: 'https://github.com/Adiejais2006',                          label: 'GitHub',    bg: '#f3f4f6',  color: '#000' },
+  { icon: <LinkedInIcon />, href: 'https://www.linkedin.com/in/aditya-jaiswal-6aba81335',  label: 'LinkedIn', bg: '#bfdbfe',  color: '#000' },
+  { icon: <XIcon />,        href: 'https://x.com',                                          label: 'X',        bg: '#111',     color: '#fff' },
+  { icon: <LeetCodeIcon />, href: 'https://leetcode.com/u/Adiejaiss2006/',                  label: 'LeetCode', bg: '#fef3c7',  color: '#000' },
+  { icon: <EmailIcon />,    href: 'mailto:adityajaisnta@gmail.com',                         label: 'Email',    bg: '#fcd34d',  color: '#000' },
 ];
 
 const stats = [
@@ -99,7 +99,7 @@ export default function Hero({ onContactClick }) {
           {/* Info rows */}
           <div className="border-t-4 border-black pt-4 space-y-2">
             {[
-              { key: 'LOCATION', val: '📍 India' },
+              { key: 'LOCATION', val: '📍 Lucknow, Uttar Pradesh' },
               { key: 'STATUS',   val: '🎓 B.Tech CSE Student' },
               { key: 'MISSION',  val: '💻 Code. Play. Chill.' },
             ].map((row) => (

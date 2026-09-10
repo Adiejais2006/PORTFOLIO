@@ -117,7 +117,7 @@ function DrawingBoard() {
           onTouchEnd={stopDraw}
         />
       </div>
-      <p className="text-xs font-mono text-center opacity-50">✍ Express yourself — draw anything!</p>
+      <p className="text-xs font-mono text-center mt-1" style={{ color: '#a78bfa' }}>✍ Express yourself — draw anything!</p>
     </div>
   );
 }

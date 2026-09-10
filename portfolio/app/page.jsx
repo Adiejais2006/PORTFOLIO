@@ -24,7 +24,7 @@ export default function Home() {
       {!loaded && <Loader onDone={handleLoaded} />}
       <ContactModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
 
-      <div className={`transition-opacity duration-700 ${loaded ? 'opacity-100' : 'opacity-0'}`}>
+      <div className={`transition-opacity duration-700 overflow-x-hidden ${loaded ? 'opacity-100' : 'opacity-0'}`}>
         <Navbar onContactClick={() => setIsModalOpen(true)} />
 
         <main>

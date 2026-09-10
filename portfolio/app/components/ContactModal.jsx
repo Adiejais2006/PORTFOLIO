@@ -38,13 +38,13 @@ const InstagramIcon = () => (
 );
 
 const links = [
-  { Icon: EmailIcon,     label: 'adityajaisnta@gmail.com', href: 'mailto:adityajaisnta@gmail.com', bgClass: 'bg-[#FDE047]', textClass: 'text-black' },
-  { Icon: GithubIcon,    label: 'GitHub',                  href: 'https://github.com/Adiejais2006', bgClass: 'bg-[#E5E7EB]', textClass: 'text-black' },
-  { Icon: LinkedInIcon,  label: 'LinkedIn',                href: 'https://linkedin.com',            bgClass: 'bg-[#BFDBFE]', textClass: 'text-black' },
-  { Icon: CodeIcon,      label: 'LeetCode',                href: 'https://leetcode.com',            bgClass: 'bg-[#FED7AA]', textClass: 'text-black' },
-  { Icon: TwitterIcon,   label: 'X (Twitter)',             href: 'https://x.com',                   bgClass: 'bg-black',     textClass: 'text-white'  },
-  { Icon: MediumIcon,    label: 'Medium',                  href: 'https://medium.com',              bgClass: 'bg-white',     textClass: 'text-black' },
-  { Icon: InstagramIcon, label: 'Instagram',               href: 'https://instagram.com',           bgClass: 'bg-[#FBCFE8]', textClass: 'text-black' },
+  { Icon: EmailIcon,     label: 'adityajaisnta@gmail.com', href: 'mailto:adityajaisnta@gmail.com',                          bgClass: 'bg-[#FDE047]', textClass: 'text-black' },
+  { Icon: GithubIcon,    label: 'GitHub',                  href: 'https://github.com/Adiejais2006',                         bgClass: 'bg-[#E5E7EB]', textClass: 'text-black' },
+  { Icon: LinkedInIcon,  label: 'LinkedIn',                href: 'https://www.linkedin.com/in/aditya-jaiswal-6aba81335',    bgClass: 'bg-[#BFDBFE]', textClass: 'text-black' },
+  { Icon: CodeIcon,      label: 'LeetCode',                href: 'https://leetcode.com/u/Adiejaiss2006/',                   bgClass: 'bg-[#FED7AA]', textClass: 'text-black' },
+  { Icon: TwitterIcon,   label: 'X (Twitter)',             href: 'https://x.com',                                          bgClass: 'bg-black',     textClass: 'text-white'  },
+  { Icon: MediumIcon,    label: 'Medium',                  href: 'https://medium.com',                                     bgClass: 'bg-white',     textClass: 'text-black' },
+  { Icon: InstagramIcon, label: 'Instagram',               href: 'https://www.instagram.com/aditya.jaiswal04/',            bgClass: 'bg-[#FBCFE8]', textClass: 'text-black' },
 ];
 
 export default function ContactModal({ isOpen, onClose }) {

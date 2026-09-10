@@ -6,29 +6,32 @@ const MARQUEE_TEXT =
 export default function Footer() {
   return (
     <footer className="mt-0">
-      {/* ── Marquee ribbon wrapper — overflow hidden prevents bleed ── */}
-      <div style={{ overflow: 'hidden', height: '60px', position: 'relative' }}>
-        <div
-          style={{
-            position: 'absolute',
-            left: '-6%',
-            right: '-6%',
-            top: '50%',
-            transform: 'translateY(-50%) rotate(-2deg)',
-            background: '#fcd34d',
-            borderTop: '4px solid #000',
-            borderBottom: '4px solid #000',
-            padding: '10px 0',
-          }}
-        >
+      {/* ── Diagonal marquee — padded container prevents overlap ── */}
+      <div style={{
+        background: '#a78bfa',
+        paddingTop: '36px',
+        paddingBottom: '36px',
+        overflow: 'hidden',
+        position: 'relative',
+        zIndex: 10,
+      }}>
+        <div style={{
+          transform: 'rotate(-3deg)',
+          background: '#fcd34d',
+          borderTop: '3px solid #000',
+          borderBottom: '3px solid #000',
+          padding: '10px 0',
+          marginLeft: '-5%',
+          marginRight: '-5%',
+        }}>
           <div className="marquee-inner">
-            {[...Array(5)].map((_, i) => (
+            {[...Array(6)].map((_, i) => (
               <span
                 key={i}
-                className="font-black text-sm tracking-wider mr-8 text-black"
+                className="font-black text-xs tracking-widest mr-10 text-black uppercase"
                 style={{ fontFamily: "'Space Mono', monospace", whiteSpace: 'nowrap' }}
               >
-                ⚠ {MARQUEE_TEXT}
+                • {MARQUEE_TEXT}
               </span>
             ))}
           </div>
@@ -36,7 +39,7 @@ export default function Footer() {
       </div>
 
       {/* ── Bottom banner ── */}
-      <div className="bg-black py-6 px-8 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div className="bg-black py-6 px-8 flex flex-col md:flex-row items-center justify-between gap-4" style={{ position: 'relative', zIndex: 20 }}>
         <div className="text-[#ff9fac] font-bold text-lg" style={{ fontFamily: "'Inter', sans-serif" }}>
           Made with ☕ and <span className="text-[#f87171]">❤</span> by{' '}
           <span className="text-[#fcd34d] font-black">Aditya Jaiswal</span>
@@ -44,10 +47,11 @@ export default function Footer() {
 
         <div className="flex gap-3 flex-wrap justify-center">
           {[
-            { label: 'GitHub ↗',     href: 'https://github.com/Adiejais2006', bg: '#f3f4f6', text: '#000' },
-            { label: 'LinkedIn ↗',   href: 'https://linkedin.com',            bg: '#0077b5', text: '#fff' },
-            { label: 'Codeforces ↗', href: 'https://codeforces.com',          bg: '#374151', text: '#fff' },
-            { label: 'Email ↗',      href: 'mailto:adityajaisnta@gmail.com',  bg: '#fcd34d', text: '#000' },
+            { label: 'GitHub ↗',     href: 'https://github.com/Adiejais2006',                       bg: '#f3f4f6', text: '#000' },
+            { label: 'LinkedIn ↗',   href: 'https://www.linkedin.com/in/aditya-jaiswal-6aba81335', bg: '#0077b5', text: '#fff' },
+            { label: 'LeetCode ↗',   href: 'https://leetcode.com/u/Adiejaiss2006/',                 bg: '#fef3c7', text: '#000' },
+            { label: 'Instagram ↗',  href: 'https://www.instagram.com/aditya.jaiswal04/',           bg: '#fce7f3', text: '#000' },
+            { label: 'Email ↗',      href: 'mailto:adityajaisnta@gmail.com',                        bg: '#fcd34d', text: '#000' },
           ].map((l) => (
             <a
               key={l.label}
