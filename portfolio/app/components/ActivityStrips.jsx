@@ -29,13 +29,15 @@ const hackathonContent = (
   <div className="p-5 bg-white">
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
       {[
-        { title: 'Inter-IIIT Hackathon', badge: '🥇 Finalist — 5th Rank All India', desc: 'Led a 4-member team to design a Secure Edge IoT gateway. Competed against 100+ teams nationwide.', color: '#f87171' },
-        { title: 'Smart India Hackathon 2025', badge: '🏆 Institute-Level Winner', desc: 'Built a full-stack MERN solution for a government problem statement. Selected as institute representative.', color: '#a78bfa' },
-      ].map((item) => (
-        <div key={item.title} className="neo-card rounded-xl p-4" style={{ background: item.color }}>
-          <div className="font-black text-lg text-white mb-1.5" style={{ fontFamily: "'Shrikhand', cursive" }}>{item.title}</div>
+        { title: 'Inter-IIIT Hackathon (Sri City)', badge: '🥇 5th Rank — All India · Nov 2025', desc: 'Led a 4-member team, built Secure Edge IoT gateway in 24 hours. Outperformed 20+ IIITs. 98% feature completion.', color: '#f87171' },
+        { title: 'Inter-IIIT Hackathon (Gwalior)', badge: '🎖️ National Finalist · 2025', desc: 'Selected as a National Finalist, representing IIIT Agartala among top engineering institutes across India.', color: '#60a5fa' },
+        { title: 'Smart India Hackathon 2025', badge: '🏆 Institute-Level Winner · 2025', desc: 'Built a full-stack MERN prototype for a national Ministry problem. Delivered live demo to government & industry evaluators.', color: '#a78bfa' },
+        { title: 'Flipkart GRiD 8.0', badge: '🚀 National Semi-Finalist · 2025', desc: 'Advanced to the National Semi-Finals in the Software Development Track by clearing multiple competitive coding and technical assessment rounds.', color: '#fcd34d', dark: true },
+      ].map((item, i) => (
+        <div key={i} className="neo-card rounded-xl p-4" style={{ background: item.color }}>
+          <div className="font-black text-base mb-1.5" style={{ fontFamily: "'Shrikhand', cursive", color: item.dark ? '#000' : '#fff' }}>{item.title}</div>
           <div className="bg-black text-white font-mono text-xs px-2 py-0.5 inline-block mb-2 font-bold">{item.badge}</div>
-          <p className="text-white font-semibold text-sm">{item.desc}</p>
+          <p className="font-semibold text-sm" style={{ color: item.dark ? '#000' : '#fff' }}>{item.desc}</p>
         </div>
       ))}
     </div>

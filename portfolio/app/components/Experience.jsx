@@ -2,20 +2,36 @@
 
 const experiences = [
   {
-    date: 'Late 2025',
-    role: 'Team Lead',
-    org: 'Inter-IIIT Hackathon Finalist',
-    desc: 'Led a 4-member team. Designed Secure Edge IoT gateway with zero-trust architecture. Ranked 5th nationally out of 100+ teams.',
+    date: 'Nov 2025',
+    role: 'Team Lead — 5th Rank All India',
+    org: 'Inter-IIIT Hackathon (Sri City)',
+    desc: 'Led a 4-member team to design and ship the Secure Edge IoT network security gateway in 24 hours, outperforming teams from 20+ IIITs. Architected a zero-trust network with active anomaly detection; managed end-to-end Git workflow to hit 98% feature completion under a strict deadline.',
     color: '#f87171',
-    label: 'EXPERIENCE.EXE',
+    label: 'HACKATHON.EXE',
+  },
+  {
+    date: '2025',
+    role: 'National Finalist',
+    org: 'Inter-IIIT Hackathon (Gwalior)',
+    desc: 'Selected as a National Finalist, successfully representing IIIT Agartala among top engineering institutes across India.',
+    color: '#60a5fa',
+    label: 'HACKATHON.EXE',
   },
   {
     date: '2025',
     role: 'Institute-Level Winner',
-    org: 'Smart India Hackathon 2025',
-    desc: 'Built a full-stack MERN prototype solving a real-world government problem statement. Won at institute level.',
+    org: 'Smart India Hackathon (SIH) 2025 — IIIT Agartala',
+    desc: 'Built a full-stack MERN prototype solving a national Ministry problem statement; won the institute-level round and advanced to national representation. Delivered a live demo to a panel of government and industry evaluators.',
     color: '#a78bfa',
     label: 'ACHIEVEMENT.EXE',
+  },
+  {
+    date: 'Jun–Aug 2026',
+    role: 'Final Technical Assessment',
+    org: 'ShopMyUniform — Selection Process',
+    desc: 'Built a full-stack MERN fashion e-commerce platform with Razorpay payments, admin panel, inventory management, and Cloudinary image storage as the final round of the internship selection process.',
+    color: '#4ade80',
+    label: 'ASSESSMENT.EXE',
   },
   {
     date: 'Jan–Feb 2025',
